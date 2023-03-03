@@ -6,7 +6,7 @@ const { getSession } = require("next-auth/react");
 const handler = async (req, res) => {
   if (!req.method === "PATCH") return;
 
-  const session = getSession({ req });
+  const session = await getSession({ req });
   if (!session) {
     res.status(401).json({ message: "Not authenticated!" });
     return;
@@ -26,7 +26,7 @@ const handler = async (req, res) => {
 
   const { oldPassword, newPassword } = req.body;
   const currentPassword = user.password;
-  const passwordsAreEqual = verifyPassword(oldPassword, currentPassword);
+  const passwordsAreEqual = await verifyPassword(oldPassword, currentPassword);
 
   if (!passwordsAreEqual) {
     res.status(403).json({ message: "Wrong password!" });
@@ -34,9 +34,9 @@ const handler = async (req, res) => {
     return;
   }
 
-  const hashedPassword = hashPassword(newPassword);
+  const hashedPassword = await hashPassword(newPassword);
 
-  usersCollection.updateOne(
+  await usersCollection.updateOne(
     { email: userEmail },
     {
       $set: {
