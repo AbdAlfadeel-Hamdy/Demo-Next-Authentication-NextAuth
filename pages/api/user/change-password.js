@@ -34,6 +34,7 @@ const handler = async (req, res) => {
     return;
   }
 
+  console.log(passwordsAreEqual);
   const hashedPassword = await hashPassword(newPassword);
 
   await usersCollection.updateOne(

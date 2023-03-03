@@ -8,7 +8,7 @@ function ProfileForm(props) {
     e.preventDefault();
 
     const enteredOldPassword = oldPasswordInputRef.current.value;
-    const enteredNewPassword = oldPasswordInputRef.current.value;
+    const enteredNewPassword = newPasswordInputRef.current.value;
 
     props.onChangePassword({
       oldPassword: enteredOldPassword,
