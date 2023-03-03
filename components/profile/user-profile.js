@@ -1,9 +1,19 @@
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import ProfileForm from "./profile-form";
 import classes from "./user-profile.module.css";
 
 function UserProfile() {
+  // Solution 1
+  // const { data: session, status } = useSession();
+  // if (!session && status !== "loading") {
+  //   window.location.href = "/auth";
+  //   return <div className={classes.profile}>Loading...</div>;
+  // }
+  // if (status === "loading")
+  //   return <div className={classes.profile}>Loading...</div>;
+
+  // Solution 2
   // const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(() => {
@@ -12,7 +22,6 @@ function UserProfile() {
   //     else setIsLoading(false);
   //   });
   // });
-  // if (isLoading) return <div className={classes.profile}>Loading...</div>;
 
   return (
     <section className={classes.profile}>
