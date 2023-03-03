@@ -18,6 +18,7 @@ const handler = async (req, res) => {
   const existingUser = await db.collection("users").findOne({ email });
   if (existingUser) {
     res.status(422).json({ message: "User already exists!" });
+    client.close();
     return;
   }
 
@@ -28,6 +29,7 @@ const handler = async (req, res) => {
     password: hashedPassword,
   });
   res.status(201).json({ message: "Created user!" });
+  client.close();
 };
 
 export default handler;
